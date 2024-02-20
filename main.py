@@ -84,20 +84,30 @@ if __name__ == '__main__':
     for ch_name in chapter_names:
         print('Глава ' + str(source_chapter_number + 69) + ' ' + ch_name + ' ' + src_chapter_link + ' ' + str(source_chapter_number))
         chapter_source, next_chapter_link = get_chapter(src_chapter_link)
-
+        #####
+        #chapter_source='萧凡杀了金樽太君，以及属于金樽太君的一众广寒圣地就算了，毕竟无力阻止，再者，他们心头其实也早都希望金樽太君去死了，但结果现在萧凡连原本属于广寒圣地的魔国后裔都要抢走，那这个就没法忍了。'
+        #next_chapter_link='sss'
+        #####
         translate_number = source_chapter_number + 69  # номер главы на русском
         src_chapter_link = next_chapter_link           # ссылка на след главу
         source_chapter_number += 1                     # номер для следующей главы
 
-        elem = driver.find_element(By.CLASS_NAME, 'relative flex-1 rounded-inherit')
+        elem = driver.find_element(By.CLASS_NAME, 'focus-visible-disabled-container')
+        #elem.find_element(By.CLASS_NAME, 'rounded-bl-inherit')
         elem.click()
+        # clear sky
+        elem.send_keys('1')
         elem.send_keys(Keys.CONTROL + 'A')
         elem.send_keys(Keys.DELETE)
-        elem.send_keys(chapter_source)
-        time.sleep(23)
-        elem = driver.find_element(By.CLASS_NAME, 'lmt__target_textarea')
 
-        translate = elem.get_attribute("value")        # готовый перевод главы
+        elem.send_keys(chapter_source)
+        time.sleep(17)
+
+        # GET TRANSLATED TEXT
+        elem = driver.find_elements(By.CLASS_NAME, 'focus-visible-disabled-container')
+        translate = elem[1].text
+        #elem = driver.find_element(By.CLASS_NAME, 'sentence_highlight')
+        #translate = elem.get_attribute("innerHTML")
 
         chapter = 'Глава ' + str(translate_number) + ' ' + ch_name + '\n' + translate + '\n'
         chapter = replace_by_templates(result_replaces, chapter)
