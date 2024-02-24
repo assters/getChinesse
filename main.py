@@ -137,10 +137,11 @@ def replaceByDictionary():
     text = f.read()
     f.close()
 
-    # замена по регуляркам
+    # замена по регуляркам для юканшу
     # (" )([А-Я])        \1- \2
-    regex = re.compile('(?P<name>(" ))(?P<name2>([А-Я]))')
-    text1 = regex.sub('\g<name>- \g<name2>', text)
+    #regex = re.compile('(?P<name>(" ))(?P<name2>([А-Я]))')
+    #text1 = regex.sub('\g<name>- \g<name2>', text)
+    text1 = text
 
     # замена текста
     replaces = [
@@ -731,9 +732,9 @@ def replaceByDictionary():
 
     text3 = replace_by_templates(replaces, text1)
     # запись в файл результата
-    f = open('result.txt', 'a', encoding="utf-8")
-    f.write(text3)
-    f.close()
+    f2 = open('result.txt', 'a', encoding="utf-8")
+    f2.write(text3)
+    f2.close()
 
 if __name__ == '__main__':
     i = 1
