@@ -1,3 +1,5 @@
+# selenium поиск по x-path атрибуту x-path "//*[@data-testid='error-{0}']"
+
 import re
 import urllib.request
 import selenium.webdriver.common
